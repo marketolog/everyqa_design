@@ -1,0 +1,89 @@
+<!-- @dsCard group="EveryQA App" viewport="1280x800" name="Приложение EveryQA" subtitle="Интерактивный UI-кит: онбординг, дашборд, урок, тренажёр, чат, тарифы, профиль" -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EveryQA — UI-кит приложения</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>html, body, #root { height: 100%; }</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+<script src="../../assets/card-loader.js"></script>
+</head>
+<body style="margin:0">
+<div id="root"></div>
+<script>
+loadDS([
+  '../../components/core/Icon.jsx',
+  '../../components/core/Button.jsx',
+  '../../components/core/IconButton.jsx',
+  '../../components/core/Badge.jsx',
+  '../../components/core/Tag.jsx',
+  '../../components/core/Card.jsx',
+  '../../components/forms/Input.jsx',
+  '../../components/forms/Select.jsx',
+  '../../components/forms/Checkbox.jsx',
+  '../../components/forms/Radio.jsx',
+  '../../components/forms/Switch.jsx',
+  '../../components/navigation/Tabs.jsx',
+  '../../components/feedback/Dialog.jsx',
+  '../../components/feedback/Toast.jsx',
+  '../../components/feedback/Tooltip.jsx',
+  '../../components/feedback/QAStatus.jsx',
+  '../../components/data/DataTable.jsx',
+  '../../components/learning/ProgressBar.jsx',
+  '../../components/learning/OfferProgress.jsx',
+  '../../components/learning/LessonCard.jsx',
+  '../../components/learning/ModuleSteps.jsx',
+  '../../components/learning/Streak.jsx',
+  '../../components/learning/XPBadge.jsx',
+  '../../components/learning/Achievement.jsx',
+  '../../components/learning/ArchiBubble.jsx',
+  './AppShell.jsx',
+  './OnboardingScreen.jsx',
+  './DashboardScreen.jsx',
+  './LessonScreen.jsx',
+  './PracticeScreen.jsx',
+  './ChatScreen.jsx',
+  './PricingScreen.jsx',
+  './ProfileScreen.jsx',
+]);
+</script>
+<script type="text/babel">
+whenDS(() => {
+  function App() {
+    const [screen, setScreen] = React.useState('dashboard');
+    const [dark, setDark] = React.useState(false);
+    const [toasts, setToasts] = React.useState([]);
+    React.useEffect(() => {
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    }, [dark]);
+    const pushToast = (t) => {
+      const id = Date.now() + Math.random();
+      setToasts((s) => [...s, { ...t, id }]);
+      setTimeout(() => setToasts((s) => s.filter((x) => x.id !== id)), 4200);
+    };
+    const stack = (
+      <div style={{ position: 'fixed', right: 20, bottom: 20, display: 'flex', flexDirection: 'column', gap: 10, zIndex: 200 }}>
+        {toasts.map((t) => <Toast key={t.id} tone={t.tone} title={t.title} description={t.description} onClose={() => setToasts((s) => s.filter((x) => x.id !== t.id))} />)}
+      </div>
+    );
+    if (screen === 'onboarding') {
+      return <div style={{ height: '100%' }}><OnboardingScreen onStart={() => setScreen('dashboard')} dark={dark} />{stack}</div>;
+    }
+    const body =
+      screen === 'lesson' ? <LessonScreen onNav={setScreen} /> :
+      screen === 'practice' ? <PracticeScreen pushToast={pushToast} /> :
+      screen === 'chat' ? <ChatScreen /> :
+      screen === 'pricing' ? <PricingScreen pushToast={pushToast} /> :
+      screen === 'profile' ? <ProfileScreen pushToast={pushToast} /> :
+      <DashboardScreen onNav={setScreen} />;
+    return <div style={{ height: '100%' }}><AppShell nav={screen} onNav={setScreen} dark={dark} onDark={setDark}>{body}</AppShell>{stack}</div>;
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+});
+</script>
+</body>
+</html>

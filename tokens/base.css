@@ -1,0 +1,12 @@
+/* EveryQA — base element defaults for pages that link styles.css */
+body {
+  margin: 0;
+  font: var(--text-body);
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+::selection { background: var(--indigo-100); }

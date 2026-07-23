@@ -1,0 +1,87 @@
+/* EveryQA — color tokens. Light is default; dark scoped to [data-theme="dark"]. */
+:root {
+  /* Brand */
+  --brand-indigo: #4F46E5;
+  --brand-violet: #7C3AED;
+  --brand-gradient: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  --graphite: #363636;
+
+  /* Indigo scale */
+  --indigo-50: #EEF2FF;
+  --indigo-100: #E0E7FF;
+  --indigo-200: #C7CDF8;
+  --indigo-600: #4F46E5;
+  --indigo-700: #4338CA;
+
+  /* Neutrals */
+  --bg: #F7F7FB;
+  --surface: #FFFFFF;
+  --surface-2: #FAFAFE;
+  --surface-3: #F1F1F7;
+  --border: #E6E6EF;
+  --border-strong: #D8D8E4;
+
+  /* Text */
+  --text: #363636;
+  --text-2: #6E6E76;
+  --text-3: #A2A2AC;
+  --text-inverse: #FFFFFF;
+
+  /* Semantic */
+  --accent: var(--brand-indigo);
+  --accent-hover: var(--indigo-700);
+  --accent-soft: var(--indigo-50);
+  --accent-soft-text: #40409A;
+  --focus-ring: rgba(79, 70, 229, 0.35);
+
+  /* QA statuses */
+  --success: #16A34A;
+  --success-soft: #E8F6ED;
+  --danger: #DC2626;
+  --danger-soft: #FCEDED;
+  --warning: #D97706;
+  --warning-soft: #FBF2E3;
+
+  /* Gamification */
+  --streak: #D97706;
+  --xp: #7C3AED;
+
+  /* Overlay */
+  --overlay: rgba(35, 35, 45, 0.55);
+}
+
+[data-theme="dark"] {
+  --bg: #1F1F24;
+  --surface: #2A2A31;
+  --surface-2: #30303A;
+  --surface-3: #383843;
+  --border: #3D3D48;
+  --border-strong: #4A4A57;
+
+  --text: #F2F2F5;
+  --text-2: #A8A8B4;
+  --text-3: #71717D;
+  --text-inverse: #FFFFFF;
+
+  --accent: #6D66F0;
+  --accent-hover: #837DF4;
+  --accent-soft: rgba(109, 102, 240, 0.16);
+  --accent-soft-text: #B9B4FA;
+  --focus-ring: rgba(109, 102, 240, 0.45);
+
+  --indigo-50: rgba(109, 102, 240, 0.12);
+  --indigo-100: rgba(109, 102, 240, 0.22);
+  --indigo-200: rgba(109, 102, 240, 0.34);
+
+  --success: #34C46B;
+  --success-soft: rgba(52, 196, 107, 0.14);
+  --danger: #F26D6D;
+  --danger-soft: rgba(242, 109, 109, 0.14);
+  --warning: #F0A13C;
+  --warning-soft: rgba(240, 161, 60, 0.14);
+
+  --streak: #F0A13C;
+  --xp: #A78BFA;
+
+  --overlay: rgba(0, 0, 0, 0.6);
+}
